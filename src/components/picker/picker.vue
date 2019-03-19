@@ -16,9 +16,9 @@
   </div>
 </template>
 <script>
-import nutpickerslot from "./picker-slot.vue";
+import nutpickerslot from './picker-slot.vue'
 export default {
-  name: "nut-picker",
+  name: 'nut-picker',
   props: {
     isVisible: {
       type: Boolean,
@@ -30,7 +30,7 @@ export default {
     },
     title: {
       type: String,
-      default: " "
+      default: ' '
     },
     listData: {
       type: Array,
@@ -44,61 +44,59 @@ export default {
   components: {
     [nutpickerslot.name]: nutpickerslot
   },
-  data() {
+  data () {
     return {
       chooseValueData: [],
       cacheValueData: [],
       isUpdate: false
-    };
+    }
   },
   watch: {
-    defaultValueData: function() {
-      this.chooseValueData = [...this.defaultValueData];
-      this.cacheValueData = [...this.defaultValueData];
-      this.$emit("confirm", this.cacheValueData);
+    defaultValueData: function () {
+      this.chooseValueData = [...this.defaultValueData]
+      this.cacheValueData = [...this.defaultValueData]
+      this.$emit('confirm', this.cacheValueData)
     }
   },
   methods: {
-    updateChooseValue(self, index, value) {
-      self.cacheValueData.splice(index, 1, value);
-      let ref = `picer-slot-${index}`;
+    updateChooseValue (self, index, value) {
+      self.cacheValueData.splice(index, 1, value)
+      let ref = `picer-slot-${index}`
       let refsLength = Object.keys(self.$refs).length
       // self.$refs[ref][0].updateTransform(value) 执行优先于 sele.$refs 的生产导致报错 以下 if else 处理这个问题
-      if (refsLength !== this.listData.length) setTimeout(() => self.$refs[ref][0].updateTransform(value))
-      else self.$refs[ref][0].updateTransform(value);
-      
+      if (refsLength !== this.listData.length) { setTimeout(() => self.$refs[ref][0].updateTransform(value)) } else self.$refs[ref][0].updateTransform(value)
     },
 
-    closeActionSheet() {
-      this.isUpdate = !this.isUpdate;
-      this.cacheValueData = [...this.chooseValueData];
-      this.$emit("close");
-      this.$emit("close-update", this, this.chooseValueData);
+    closeActionSheet () {
+      this.isUpdate = !this.isUpdate
+      this.cacheValueData = [...this.chooseValueData]
+      this.$emit('close')
+      this.$emit('close-update', this, this.chooseValueData)
     },
 
-    confirm() {
-      this.$emit("confirm", this.cacheValueData);
-      this.chooseValueData = [...this.cacheValueData];
-      this.$emit("close");
+    confirm () {
+      this.$emit('confirm', this.cacheValueData)
+      this.chooseValueData = [...this.cacheValueData]
+      this.$emit('close')
     },
 
-    chooseItem(value, index) {
+    chooseItem (value, index) {
       if (this.cacheValueData[index] !== value) {
-        this.cacheValueData[index] = value;
-        this.$emit("choose", this, index, value, this.cacheValueData);
+        this.cacheValueData[index] = value
+        this.$emit('choose', this, index, value, this.cacheValueData)
       }
     }
   },
-  created() {
+  created () {
     if (this.defaultValueData && this.defaultValueData.length) {
-      this.chooseValueData = [...this.defaultValueData];
+      this.chooseValueData = [...this.defaultValueData]
     } else {
-      let defaultValueData = [];
-      this.listData.map((item) => {
-        defaultValueData.push(item[0]);  
-      });
-      this.chooseValueData = [...defaultValueData];
+      let defaultValueData = []
+      this.listData.map(item => {
+        defaultValueData.push(item[0])
+      })
+      this.chooseValueData = [...defaultValueData]
     }
   }
-};
+}
 </script>

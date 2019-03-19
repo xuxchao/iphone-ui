@@ -28,6 +28,21 @@
       "autoprefixer": {}
     }
   },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "extends": [
+        "plugin:vue/essential",
+        "standard"
+    ],
+    "rules": {},
+    "parserOptions": {
+        "parser": "babel-eslint"
+    }
+},
   "browserslist": [
     "> 1%",
     "last 2 versions",
