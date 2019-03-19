@@ -62,11 +62,11 @@ export default {
     updateChooseValue(self, index, value) {
       self.cacheValueData.splice(index, 1, value);
       let ref = `picer-slot-${index}`;
-      console.log('111', ref,self.$refs)
-      setTimeout(()=>{
-        console.log('222', ref, self.$refs)
-      })
-      // self.$refs[ref][0].updateTransform(value);
+      let refsLength = Object.keys(self.$refs).length
+      // self.$refs[ref][0].updateTransform(value) 执行优先于 sele.$refs 的生产导致报错 以下 if else 处理这个问题
+      if (refsLength !== this.listData.length) setTimeout(() => self.$refs[ref][0].updateTransform(value))
+      else self.$refs[ref][0].updateTransform(value);
+      
     },
 
     closeActionSheet() {
@@ -94,8 +94,8 @@ export default {
       this.chooseValueData = [...this.defaultValueData];
     } else {
       let defaultValueData = [];
-      this.listData.map((item, index) => {
-        defaultValueData.push(item[0]);
+      this.listData.map((item) => {
+        defaultValueData.push(item[0]);  
       });
       this.chooseValueData = [...defaultValueData];
     }

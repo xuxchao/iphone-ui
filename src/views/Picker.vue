@@ -53,8 +53,7 @@ export default {
     };
   },
   methods: {
-    updateChooseValue(self, index, value, cacheValueData) {
-      console.log('updateChooseValue', index, value, cacheValueData)
+    updateChooseValue(self, index, value) {
       index < 2 && this.updateLinkage(self, value, index + 1, null);
     },
     updateLinkage(self, value, index, chooseValue, cacheValueData) {
@@ -62,7 +61,7 @@ export default {
         return false;
       }
       switch (index) {
-        case 1:
+        case 1: {
           let i = this.listData[0].indexOf(value);
           this.listData.splice(index, 1, [...this.data[this.listData[0][i]]]);
           chooseValue = chooseValue ? chooseValue : this.listData[index][0];
@@ -74,12 +73,14 @@ export default {
             cacheValueData && cacheValueData[2] ? cacheValueData[2] : null
           );
           break;
-        case 2:
+        }
+        case 2: {
           let areaData = this.dataSub[value] ? this.dataSub[value] : [];
           this.listData.splice(index, 1, [...areaData]);
           chooseValue = chooseValue ? chooseValue : this.listData[index][0];
           self && self.updateChooseValue(self, index, chooseValue);
           break;
+        }
       }
     }
   }
