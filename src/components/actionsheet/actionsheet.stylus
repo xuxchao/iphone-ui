@@ -1,7 +1,6 @@
-@import "../../styles/animation/fade";
-@import "../../styles/animation/slide-up";
+@import "../../styles/index.stylus"
 .nut-actionsheet-mask{
-    @include fix-fullscreen();
+    fix-fullscreen()
 }
 .nut-actionsheet-panel{
     position: fixed;
