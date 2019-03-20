@@ -20,7 +20,7 @@
 </template>
 <script>
 export default {
-  name: "nut-picker-slot",
+  name: 'nut-picker-slot',
   props: {
     listData: {
       type: Array,
@@ -38,7 +38,7 @@ export default {
       default: false
     }
   },
-  data() {
+  data () {
     return {
       touchParams: {
         startY: 0,
@@ -52,163 +52,162 @@ export default {
       lineSpacing: 36,
       rotation: 20,
       timer: null
-    };
+    }
   },
   watch: {
-    isUpdate: function() {
-      this.transformY = 0;
-      this.modifyStatus();
+    isUpdate: function () {
+      this.transformY = 0
+      this.modifyStatus()
     },
-    defaultValue: function() {
-      this.transformY = 0;
-      this.modifyStatus();
+    defaultValue: function () {
+      this.transformY = 0
+      this.modifyStatus()
     }
   },
   methods: {
-    updateTransform(value) {
+    updateTransform (value) {
       if (value) {
-        this.transformY = 0;
+        this.transformY = 0
         this.timer = setTimeout(() => {
-          this.modifyStatus(null, value);
-        }, 10);
+          this.modifyStatus(null, value)
+        }, 10)
       }
     },
 
-    setRollerStyle(index) {
-      return `transform: rotate3d(1, 0, 0, ${-this.rotation * index}deg) translate3d(0px, 0px, 104px)`;
+    setRollerStyle (index) {
+      return `transform: rotate3d(1, 0, 0, ${-this.rotation *
+        index}deg) translate3d(0px, 0px, 104px)`
     },
 
-    isHidden(index) {
+    isHidden (index) {
       if (index >= this.currIndex + 8 || index <= this.currIndex - 8) {
-        return true;
+        return true
       } else {
-        return false;
+        return false
       }
     },
 
-    setTransform(translateY = 0, type, time = 1000, deg) {
-      if (type === "end") {
-        this.$refs.list.style.webkitTransition = `transform ${time}ms cubic-bezier(0.19, 1, 0.22, 1)`;
-        this.$refs.roller.style.webkitTransition = `transform ${time}ms cubic-bezier(0.19, 1, 0.22, 1)`;
+    setTransform (translateY = 0, type, time = 1000, deg) {
+      if (type === 'end') {
+        this.$refs.list.style.webkitTransition = `transform ${time}ms cubic-bezier(0.19, 1, 0.22, 1)`
+        this.$refs.roller.style.webkitTransition = `transform ${time}ms cubic-bezier(0.19, 1, 0.22, 1)`
       } else {
-        this.$refs.list.style.webkitTransition = "";
-        this.$refs.roller.style.webkitTransition = "";
+        this.$refs.list.style.webkitTransition = ''
+        this.$refs.roller.style.webkitTransition = ''
       }
-      this.$refs.list.style.webkitTransform = `translate3d(0, ${translateY}px, 0)`;
-      this.$refs.roller.style.webkitTransform = `rotate3d(1, 0, 0, ${deg})`;
-      this.scrollDistance = translateY;
+      this.$refs.list.style.webkitTransform = `translate3d(0, ${translateY}px, 0)`
+      this.$refs.roller.style.webkitTransform = `rotate3d(1, 0, 0, ${deg})`
+      this.scrollDistance = translateY
     },
 
-    setMove(move, type, time) {
-      let updateMove = move + this.transformY;
+    setMove (move, type, time) {
+      let updateMove = move + this.transformY
       // 设置极值，让用户滚动的时候不至于手不送可以一直滚动
-      let maxMove = this.lineSpacing * 2;
-      let minMove = -this.lineSpacing * this.listData.length - this.lineSpacing;
-      if (updateMove > maxMove) updateMove = maxMove;
-      if (updateMove < minMove) updateMove = minMove;
-      if (type === "end") {
+      let maxMove = this.lineSpacing * 2
+      let minMove = -this.lineSpacing * this.listData.length - this.lineSpacing
+      if (updateMove > maxMove) updateMove = maxMove
+      if (updateMove < minMove) updateMove = minMove
+      if (type === 'end') {
         // 限定滚动距离
         if (updateMove > 0) {
-          updateMove = 0;
+          updateMove = 0
         }
         if (updateMove < -(this.listData.length - 1) * this.lineSpacing) {
-          updateMove = -(this.listData.length - 1) * this.lineSpacing;
+          updateMove = -(this.listData.length - 1) * this.lineSpacing
         }
 
         // 设置滚动距离为lineSpacing的倍数值
         let endMove =
-          Math.round(updateMove / this.lineSpacing) * this.lineSpacing;
+          Math.round(updateMove / this.lineSpacing) * this.lineSpacing
         let deg = `${(Math.abs(Math.round(endMove / this.lineSpacing)) + 1) *
-          this.rotation}deg`;
-        this.setTransform(endMove, type, time, deg);
+          this.rotation}deg`
+        this.setTransform(endMove, type, time, deg)
         this.timer = setTimeout(() => {
-          this.setChooseValue(endMove);
-        }, time / 2);
+          this.setChooseValue(endMove)
+        }, time / 2)
 
-        this.currIndex = Math.abs(Math.round(endMove / this.lineSpacing)) + 1;
+        this.currIndex = Math.abs(Math.round(endMove / this.lineSpacing)) + 1
       } else {
-        let deg = "0deg";
+        let deg = '0deg'
         // 上拉减小 下滑增大  默认为 0 ，大于 0 说明超出范围
         if (updateMove < 0) {
           deg = `${(Math.abs(updateMove / this.lineSpacing) + 1) *
-            this.rotation}deg`;
+            this.rotation}deg`
         } else {
-          deg = `${(-updateMove / this.lineSpacing + 1) * this.rotation}deg`;
+          deg = `${(-updateMove / this.lineSpacing + 1) * this.rotation}deg`
         }
-        this.setTransform(updateMove, null, null, deg);
+        this.setTransform(updateMove, null, null, deg)
         this.currIndex =
-          Math.abs(Math.round(updateMove / this.lineSpacing)) + 1;
+          Math.abs(Math.round(updateMove / this.lineSpacing)) + 1
       }
     },
 
-    setChooseValue(move) {
-      this.$emit("chooseItem",this.listData[Math.round(-move / this.lineSpacing)],this.keyIndex);
+    setChooseValue (move) {
+      this.$emit('chooseItem', this.listData[Math.round(-move / this.lineSpacing)], this.keyIndex)
     },
 
-    touchStart(event) {
-      event.preventDefault();
+    touchStart (event) {
+      event.preventDefault()
 
-      let changedTouches = event.changedTouches[0];
-      this.touchParams.startY = changedTouches.pageY;
-      this.touchParams.startTime = event.timestamp || Date.now();
-      this.transformY = this.scrollDistance;
+      let changedTouches = event.changedTouches[0]
+      this.touchParams.startY = changedTouches.pageY
+      this.touchParams.startTime = event.timestamp || Date.now()
+      this.transformY = this.scrollDistance
     },
 
-    touchMove(event) {
-      event.preventDefault();
+    touchMove (event) {
+      event.preventDefault()
 
-      let changedTouches = event.changedTouches[0];
-      this.touchParams.lastY = changedTouches.pageY;
-      this.touchParams.lastTime = event.timestamp || Date.now();
+      let changedTouches = event.changedTouches[0]
+      this.touchParams.lastY = changedTouches.pageY
+      this.touchParams.lastTime = event.timestamp || Date.now()
 
-      let move = this.touchParams.lastY - this.touchParams.startY;
-      this.setMove(move);
+      let move = this.touchParams.lastY - this.touchParams.startY
+      this.setMove(move)
     },
 
-    touchEnd(event) {
-      event.preventDefault();
+    touchEnd (event) {
+      event.preventDefault()
 
-      let changedTouches = event.changedTouches[0];
-      this.touchParams.lastY = changedTouches.pageY;
-      this.touchParams.lastTime = event.timestamp || Date.now();
-      let move = this.touchParams.lastY - this.touchParams.startY;
+      let changedTouches = event.changedTouches[0]
+      this.touchParams.lastY = changedTouches.pageY
+      this.touchParams.lastTime = event.timestamp || Date.now()
+      let move = this.touchParams.lastY - this.touchParams.startY
 
-      let moveTime = this.touchParams.lastTime - this.touchParams.startTime;
+      let moveTime = this.touchParams.lastTime - this.touchParams.startTime
       if (moveTime <= 300) {
-        move = move * 2;
-        moveTime = moveTime + 1000;
-        this.setMove(move, "end", moveTime);
+        move = move * 2
+        moveTime = moveTime + 1000
+        this.setMove(move, 'end', moveTime)
       } else {
-        this.setMove(move, "end");
+        this.setMove(move, 'end')
       }
     },
     // 修改状态
-    modifyStatus(type, defaultValue) {
-      defaultValue = defaultValue ? defaultValue : this.defaultValue;
-      let index = this.listData.indexOf(defaultValue);
-      this.currIndex = index === -1 ? 1 : index + 1;
-      let move = index === -1 ? 0 : index * this.lineSpacing;
-      type && this.setChooseValue(-move);
-      this.setMove(-move);
+    modifyStatus (type, defaultValue) {
+      defaultValue = defaultValue || this.defaultValue
+      let index = this.listData.indexOf(defaultValue)
+      this.currIndex = index === -1 ? 1 : index + 1
+      let move = index === -1 ? 0 : index * this.lineSpacing
+      type && this.setChooseValue(-move)
+      this.setMove(-move)
     }
   },
 
-  mounted() {
-    
+  mounted () {
     this.$nextTick(() => {
-      this.modifyStatus(true);
+      this.modifyStatus(true)
       // 监听
-      this.$el.addEventListener("touchstart", this.touchStart);
-      this.$el.addEventListener("touchmove", this.touchMove);
-      this.$el.addEventListener("touchend", this.touchEnd);
-    });
+      this.$el.addEventListener('touchstart', this.touchStart)
+      this.$el.addEventListener('touchmove', this.touchMove)
+      this.$el.addEventListener('touchend', this.touchEnd)
+    })
   },
-  beforeDestroy() {
-    this.$el.removeEventListener("touchstart", this.touchStart);
-    this.$el.removeEventListener("touchmove", this.touchMove);
-    this.$el.removeEventListener("touchend", this.touchEnd);
-    clearTimeout(this.timer);
+  beforeDestroy () {
+    this.$el.removeEventListener('touchstart', this.touchStart)
+    this.$el.removeEventListener('touchmove', this.touchMove)
+    this.$el.removeEventListener('touchend', this.touchEnd)
+    clearTimeout(this.timer)
   }
-};
+}
 </script>
-

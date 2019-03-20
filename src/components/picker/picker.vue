@@ -63,8 +63,10 @@ export default {
       self.cacheValueData.splice(index, 1, value)
       let ref = `picer-slot-${index}`
       let refsLength = Object.keys(self.$refs).length
-      // self.$refs[ref][0].updateTransform(value) 执行优先于 sele.$refs 的生产导致报错 以下 if else 处理这个问题
-      if (refsLength !== this.listData.length) { setTimeout(() => self.$refs[ref][0].updateTransform(value)) } else self.$refs[ref][0].updateTransform(value)
+      // self.$refs[ref][0].updateTransform(value) 执行优先于 sele.$refs 的生产导致报错所以用没有时间的setTimeout来改变调用顺序
+      if (refsLength !== this.listData.length) {
+        setTimeout(() => self.$refs[ref][0].updateTransform(value))
+      } else self.$refs[ref][0].updateTransform(value)
     },
 
     closeActionSheet () {
@@ -83,7 +85,7 @@ export default {
     chooseItem (value, index) {
       if (this.cacheValueData[index] !== value) {
         this.cacheValueData[index] = value
-        this.$emit('choose', this, index, value, this.cacheValueData)
+        this.$emit('choose', this.cacheValueData)
       }
     }
   },

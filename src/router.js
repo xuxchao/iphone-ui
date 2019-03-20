@@ -6,14 +6,19 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/a',
+      path: '/',
       name: 'home',
       component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
     },
     {
-      path: '/',
+      path: '/picker',
       name: 'picker',
       component: () => import(/* webpackChunkName: "picker" */ './views/Picker.vue')
+    },
+    {
+      path: '/actionsheet',
+      name: 'actionsheet',
+      component: () => import(/* webpackChunkName: "picker" */ './views/Actionsheet.vue')
     }
   ]
 })
