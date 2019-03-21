@@ -7,9 +7,7 @@
             ></div>
         </transition>
         <transition :name="isAnimation?'nutSlideUp':''">
-            <div class="nut-actionsheet-panel"
-                v-show="isVisible"
-            >
+            <div class="nut-actionsheet-panel" v-show="isVisible">
                 <div class="nut-actionsheet-custom"  v-if="$slots.custom">
                     <slot name="custom" v-html="custom"></slot>
                 </div>
