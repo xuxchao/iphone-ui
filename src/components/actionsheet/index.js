@@ -1,7 +1,5 @@
 import ActionSheet from './actionsheet.vue'
-// import './actionsheet.stylus'
-import './actionsheet.css'
-
+import './actionsheet.styl'
 ActionSheet.install = function (Vue) {
   Vue.component(ActionSheet.name, ActionSheet)
 }

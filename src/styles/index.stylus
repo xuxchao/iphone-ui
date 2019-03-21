@@ -1,3 +1,0 @@
-@import 'variable.stylus';
-@import './mixins/index.stylus';
-@import './animation/index.stylus';

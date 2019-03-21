@@ -1,0 +1,67 @@
+@import "../../styles/index"
+.nut-cell {
+    display: block;
+    padding: 0 10px;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent; // http://note.youdao.com/noteshare?id=0a9091fbf8e404b6e549943dc2b45b87&sub=53E7674DC5964F6EB02C1D5103FEC711
+    outline: none;
+    &.nut-cell-link:active {
+        background-color: $light-color !important;
+    }
+    .nut-cell-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 48px;
+        @extends $nut-cell-border
+    }
+    .nut-cell-left {
+        flex: 1;
+        flex-direction: column;
+    }
+    .nut-cell-title {
+        display: block;
+        line-height: $line-height-base;
+        font-size: $font-size-base;
+        color: $title-color;
+    }
+    .nut-cell-sub-title {
+        display: block;
+        line-height: 1;
+        font-size: $font-size-small;
+        color: $text-color;
+        margin-top: 5px;
+        &:empty {
+            display: none;
+        }
+    }
+    .nut-cell-right {
+        display: flex;
+        align-items: center;
+        font-size: $font-size-small;
+        color: $text-color;
+    }
+    .nut-cell-icon {
+        display: flex;
+        align-items: center;
+        img {
+            height: 14px;
+            margin-left: 10px;
+        }
+    }
+    &:first-of-type {
+        @extends $nut-cell-border
+        .nut-cell-box {
+            background-image: none;
+        }
+    }
+    &:last-of-type {
+        @extends $nut-cell-border
+        background-position: bottom;
+    }
+    &:only-of-type {
+        background: linear-gradient(rgba($dark-color, .5), rgba($dark-color, .5)) bottom, linear-gradient(rgba($dark-color, .5), rgba($dark-color, .5)) top;
+        background-size: 100% 1px;
+        background-repeat: no-repeat;
+    }
+}

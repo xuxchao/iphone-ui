@@ -1,6 +1,13 @@
 <template>
   <div class="actionsheet">
     <div class="button" @click="switchActionSheet('isVisible')"></div>
+    <nut-cell
+      :isLink = "true"
+      title = "性别"
+      :showIcon = "true"
+      desc="请选择"
+      @click.native="switchActionSheet('isVisible')">
+    </nut-cell>
     <nut-actionsheet
       :is-visible="isVisible"
       @close="switchActionSheet('isVisible')"

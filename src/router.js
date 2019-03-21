@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Nav from './views/Demonav.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -8,17 +8,34 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import(/* webpackChunkName: "home" */ './views/Home.vue')
+      components: {
+        main: () => import(/* webpackChunkName: "home" */ './views/Home.vue'),
+        demonav: Nav
+      }
     },
     {
       path: '/picker',
       name: 'picker',
-      component: () => import(/* webpackChunkName: "picker" */ './views/Picker.vue')
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Picker.vue'),
+        demonav: Nav
+      }
     },
     {
       path: '/actionsheet',
       name: 'actionsheet',
-      component: () => import(/* webpackChunkName: "picker" */ './views/Actionsheet.vue')
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Actionsheet.vue'),
+        demonav: Nav
+      }
+    },
+    {
+      path: '/cell',
+      name: 'cell',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Cell.vue'),
+        demonav: Nav
+      }
     }
   ]
 })
