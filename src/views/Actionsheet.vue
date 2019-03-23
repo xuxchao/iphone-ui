@@ -82,13 +82,6 @@
     </nut-actionsheet>
   </div>
 </template>
-<style lang="stylus" scoped>
-.button {
-  width: 100px;
-  height: 50px;
-  background: red;
-}
-</style>
 
 <script>
 export default {

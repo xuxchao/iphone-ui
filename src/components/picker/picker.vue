@@ -1,5 +1,5 @@
 <template>
-  <div class="nut-picker" slot="custom" :class="customClassName ? customClassName : null">
+  <!-- <div class="nut-picker" slot="custom" :class="customClassName ? customClassName : null"> -->
     <div class="nut-picker-panel">
       <template v-for="(item, index) of listData">
         <nut-picker-slot
@@ -13,7 +13,7 @@
         ></nut-picker-slot>
       </template>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 <script>
 import nutpickerslot from './picker-slot.vue'

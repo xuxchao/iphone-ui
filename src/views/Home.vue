@@ -13,6 +13,7 @@ export default {
       listData: [
         { title: 'picker', link: '#/picker' },
         { title: 'actionsheet', link: '#/actionsheet' },
+        { title: 'address', link: '#/address' },
         { title: 'cell', link: '#/cell' }
       ]
     }

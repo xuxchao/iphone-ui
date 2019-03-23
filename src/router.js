@@ -36,6 +36,14 @@ export default new Router({
         main: () => import(/* webpackChunkName: "picker" */ './views/Cell.vue'),
         demonav: Nav
       }
+    },
+    {
+      path: '/address',
+      name: 'address',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Address.vue'),
+        demonav: Nav
+      }
     }
   ]
 })
