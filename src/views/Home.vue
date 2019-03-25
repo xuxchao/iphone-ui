@@ -15,6 +15,11 @@ export default {
         { title: 'actionsheet', link: '#/actionsheet' },
         { title: 'radio', link: '#/radio' },
         { title: 'checkbox', link: '#/checkbox' },
+        { title: 'switch', link: '#/switch' },
+        { title: 'button', link: '#/button' },
+        { title: 'buttongroup', link: '#/buttongroup' },
+        { title: 'backtop', link: '#/backtop' },
+        { title: 'toast', link: '#/toast' },
         { title: 'cell', link: '#/cell' }
       ]
     }

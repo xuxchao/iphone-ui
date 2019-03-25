@@ -52,6 +52,46 @@ export default new Router({
         main: () => import(/* webpackChunkName: "picker" */ './views/Checkbox.vue'),
         demonav: Nav
       }
+    },
+    {
+      path: '/switch',
+      name: 'switch',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Switch.vue'),
+        demonav: Nav
+      }
+    },
+    {
+      path: '/button',
+      name: 'button',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Button.vue'),
+        demonav: Nav
+      }
+    },
+    {
+      path: '/buttongroup',
+      name: 'buttongroup',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Buttongroup.vue'),
+        demonav: Nav
+      }
+    },
+    {
+      path: '/backtop',
+      name: 'backtop',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Backtop.vue'),
+        demonav: Nav
+      }
+    },
+    {
+      path: '/toast',
+      name: 'toast',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Toast.vue'),
+        demonav: Nav
+      }
     }
   ]
 })
