@@ -13,7 +13,8 @@ export default {
       listData: [
         { title: 'picker', link: '#/picker' },
         { title: 'actionsheet', link: '#/actionsheet' },
-        { title: 'address', link: '#/address' },
+        { title: 'radio', link: '#/radio' },
+        { title: 'checkbox', link: '#/checkbox' },
         { title: 'cell', link: '#/cell' }
       ]
     }

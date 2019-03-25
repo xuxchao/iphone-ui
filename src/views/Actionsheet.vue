@@ -1,6 +1,6 @@
 <template>
   <div class="actionsheet">
-
+    <h4>基本用法</h4>
     <!-- 第一组 性别 -->
     <nut-cell
       :isLink = "true"
@@ -80,6 +80,18 @@
       @close="switchActionSheet('isVisible5')">
       <div slot="custom" class="custom-wrap"><span>自定义</span></div>
     </nut-actionsheet>
+    <!-- 第六组 带头部自定义 -->
+    <nut-cell
+      :isLink = "true"
+      title = "带头部自定义"
+      :showIcon = "true"
+      @click.native="switchActionSheet('isVisible6')">
+      <span slot="desc">打开</span>
+    </nut-cell>
+    <nut-actionsheet :is-visible="isVisible6"
+      @close="switchActionSheet('isVisible6')">
+      <div slot="customHasHeader" class="custom-wrap"><span>自定义</span></div>
+    </nut-actionsheet>
   </div>
 </template>
 
@@ -150,7 +162,9 @@ export default {
       ],
       isVisible4: false,
       // 第五组 提示类
-      isVisible5: false
+      isVisible5: false,
+      // 第五组 提示类
+      isVisible6: false
     }
   },
   methods: {

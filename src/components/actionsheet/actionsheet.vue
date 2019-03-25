@@ -11,18 +11,6 @@
                 <div class="nut-actionsheet-custom"  v-if="$slots.custom">
                     <slot name="custom" v-html="custom"></slot>
                 </div>
-
-                <!-- <div class="nut-actionsheet-custom"  v-if="$slots.customHasHeader">
-                  <div class="nut-picker" :class="customClassName ? customClassName : null">
-                      <div class="nut-picker-control">
-                          <span class="nut-picker-confirm-btn"  @click="switchActionSheet('isVisible')">{{cancelText}}</span>
-                          <div class="nut-picker-title">{{title ? title : ''}}</div>
-                          <span class="nut-picker-cancel-btn" @click="switchActionSheet('isVisible')">{{okBtnTxt}}</span>
-                      </div>
-                      <slot name="custom" v-html="custom"></slot>
-                  </div>
-                </div> -->
-
                 <dl class="nut-actionsheet-modal" v-if="$slots.title || $slots.subTitle ">
                     <dt class="nut-actionsheet-title"><slot name="title" v-html="title"></slot></dt>
                     <dd class="nut-actionsheet-sub-title"><slot name="sub-title" v-html="subTitle"></slot></dd>
@@ -74,18 +62,6 @@ export default {
     menuItems: {
       type: Array,
       default: () => []
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    cancelText: {
-      type: String,
-      default: '取消'
-    },
-    okBtnTxt: {
-      type: String,
-      default: '确定'
     }
   },
   data () {
@@ -115,6 +91,3 @@ export default {
   }
 }
 </script>
-<style lang="stylus" scoped>
-
-</style>

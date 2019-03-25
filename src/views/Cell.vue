@@ -1,5 +1,6 @@
 <template>
   <div class="cell">
+    <h4>基本用法</h4>
     <nut-cell
       title = "模式一"
       subTitle = "无单机状态"

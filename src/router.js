@@ -38,10 +38,18 @@ export default new Router({
       }
     },
     {
-      path: '/address',
-      name: 'address',
+      path: '/radio',
+      name: 'radio',
       components: {
-        main: () => import(/* webpackChunkName: "picker" */ './views/Address.vue'),
+        main: () => import(/* webpackChunkName: "picker" */ './views/Radio.vue'),
+        demonav: Nav
+      }
+    },
+    {
+      path: '/checkbox',
+      name: 'checkbox',
+      components: {
+        main: () => import(/* webpackChunkName: "picker" */ './views/Checkbox.vue'),
         demonav: Nav
       }
     }
